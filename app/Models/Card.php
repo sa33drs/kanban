@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Card extends Model
 {
     use HasFactory;
-    protected $fillable = ['text'];
+    protected $fillable = ['text','column_id'];
 
 }

@@ -7,15 +7,17 @@ use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Card::all();
+        $cards = Card::where('column_id',$request->column_id)->get();
+        return $cards;
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'text'  => 'required'
+            'text'  => 'required',
+            'column_id' => 'required'
         ]);
         return Card::create([$request->all()]);
     }

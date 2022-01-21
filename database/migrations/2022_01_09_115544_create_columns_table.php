@@ -17,6 +17,8 @@ class CreateColumnsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('position');
+            $table->unsignedBigInteger('board_id');
+            $table->foreign('board_id')->references('id')->on('boards');
             $table->timestamps();
 
         });

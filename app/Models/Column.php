@@ -10,4 +10,7 @@ class Column extends Model
     use HasFactory;
     protected $fillable = ['name','position','board_id'];
 
+    public function cards(){
+        return $this->hasMany(Card::class);
+    }
 }

@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class ColumnController extends Controller
 {
 
-    public function index(Request $request)
+    public function index(Request $request,$board_id)
     {
-        $columns = Column::where('board_id',$request->board_id)->get();
+        $columns = Column::where('board_id','=',$board_id)->get();
         return $columns;
     }
 

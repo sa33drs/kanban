@@ -26,6 +26,7 @@ Route::group(['middleware'=> 'auth:sanctum'],function (){
     Route::resource('cards',CardController::class)->except(['create','edit']);
     Route::resource('boards',BoardController::class)->except(['create','edit']);
     Route::resource('columns',ColumnController::class)->except(['create','edit']);
+    Route::get('/boards/{board}/columns',[ColumnController::class,'index']);
 });
 
 

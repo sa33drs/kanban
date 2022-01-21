@@ -19,7 +19,10 @@ class CardController extends Controller
             'text'  => 'required',
             'column_id' => 'required'
         ]);
-        return Card::create([$request->all()]);
+        return Card::create([
+            'text' => $request->text,
+            'column_id' => $request->column_id
+        ]);
     }
 
     public function show($id)

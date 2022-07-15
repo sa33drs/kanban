@@ -6,6 +6,7 @@ use App\Models\Board;
 use App\Models\TaskField;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BoardController extends Controller
 {
@@ -17,6 +18,7 @@ class BoardController extends Controller
 
     public function store(Request $request)
     {
+        Log::info($request->all());
         $board =  Board::create([
             'title' => $request->title,
             'description' => $request->description,

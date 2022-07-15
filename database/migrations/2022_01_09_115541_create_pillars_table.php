@@ -20,7 +20,6 @@ class CreatePillarsTable extends Migration
             $table->unsignedBigInteger('board_id');
             $table->foreign('board_id')->references('id')->on('boards');
             $table->timestamps();
-
         });
     }
 
@@ -31,6 +30,6 @@ class CreatePillarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('columns');
+        Schema::dropIfExists('pillars');
     }
 }

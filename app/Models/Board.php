@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Board extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','creator_id'];
+    protected $fillable = ['title','description','creator_id'];
+
+//    public function users(){
+//        return $this->belongsToMany(Board::class);
+//    }
 }

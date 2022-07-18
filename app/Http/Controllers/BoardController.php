@@ -37,9 +37,9 @@ class BoardController extends Controller
         ],200);
     }
 
-    public function show($id)
+    public function show(Board $board)
     {
-        return Board::find($id);
+        return $board->with('pillars','pillars.tasks')->get();
     }
 
     public function update(Request $request, Board $board)
@@ -51,17 +51,5 @@ class BoardController extends Controller
     public function destroy(Board $board)
     {
         return $board->delete();
-    }
-
-    public function assign_user(Board $board, string $user){
-        $user = User::where('email',$user)->firstOrFail();
-        $user->where('username',$user)->firstOrFail();
-        if (!empty($user) && $user->exists()){
-            $board->users()->attach($user);
-        }
-    }
-
-    public function users(Board $board){
-
     }
 }

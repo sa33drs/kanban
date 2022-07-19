@@ -16,6 +16,7 @@ class CreatePillarsTable extends Migration
         Schema::create('pillars', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('description')->nullable();
             $table->integer('order');
             $table->unsignedBigInteger('board_id');
             $table->foreign('board_id')->references('id')->on('boards');

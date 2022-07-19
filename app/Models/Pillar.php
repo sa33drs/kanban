@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Column extends Model
+class Pillar extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','position','board_id'];
+    protected $fillable = ['title','description','order','position','board_id'];
 
-    public function cards(){
-        return $this->hasMany(Card::class);
+    public function tasks(){
+        return $this->hasMany(Task::class);
     }
 }

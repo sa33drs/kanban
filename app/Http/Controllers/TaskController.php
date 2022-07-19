@@ -40,6 +40,10 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
+        if ($request->pillar_id > 0){
+            $task->pillar_id = $request->pillar_id;
+            return;
+        }
         Log::debug($request->all());
         $task->title = $request->title;
         $task->description = $request->description;

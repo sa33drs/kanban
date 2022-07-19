@@ -2,43 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Card;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
-class CardController extends Controller
+class TaskController extends Controller
 {
     public function index(Request $request)
     {
-        $cards = Card::where('column_id',$request->column_id)->get();
-        return $cards;
+        $tasks = Task::where('column_id',$request->column_id)->get();
+        return $tasks;
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'text'  => 'required',
-            'column_id' => 'required'
+            'title'  => 'required',
+            'pillar_id' => 'required'
         ]);
-        return Card::create([
-            'text' => $request->text,
-            'column_id' => $request->column_id
+        return Task::create([
+            'title' => $request->title,
+            'pillar_id' => $request->pillar_id
         ]);
     }
 
-    public function show($id)
+    public function show(Task $task)
     {
-        return Card::find($id);
+        return $task;
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        $card = Card::find($id);
-        $card->update($request->all());
-        return $card;
+        $task->update($request->all());
+        return $task;
     }
 
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        return Card::destroy($id);
+        return $task->delete();
     }
 }

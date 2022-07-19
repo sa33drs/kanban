@@ -2,42 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Column;
+use App\Models\Pillar;
 use Illuminate\Http\Request;
 
-class ColumnController extends Controller
+class PillarController extends Controller
 {
 
-    public function index(Request $request,$board_id)
+    public function index($board_id)
     {
-        $columns = Column::where('board_id','=',$board_id)->with('cards')->get();
-        return $columns;
+        $pillars = Pillar::where('board_id','=',$board_id)->with('cards')->get();
+        return $pillars;
     }
 
     public function store(Request $request)
     {
-
-        return Column::create([
-            'name'  => $request->name,
-            'position'  => $request->position,
+        return Pillar::create([
+            'title'  => $request->title,
+            'description'  => $request->description,
+            'order'  => $request->order,
             'board_id'  => $request->board_id
         ]);
     }
 
-    public function show($id)
+    public function show(Pillar $pillar)
     {
-        return Column::find($id);
+        return $pillar;
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Pillar $pillar)
     {
-        $column = Column::find($id);
-        $column->update($request->all());
-        return $column;
+        $pillar->update($request->all());
+        return $pillar;
     }
 
-    public function destroy($id)
+    public function destroy(Pillar $pillar)
     {
-        return Column::destroy($id);
+        return $pillar->delete();
     }
 }

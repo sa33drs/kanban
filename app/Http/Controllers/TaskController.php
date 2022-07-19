@@ -40,16 +40,9 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-        if ($request->pillar_id =! -1){
+        if ($request->pillar_id != -1){
             $task->pillar_id = $request->pillar_id;
-            $task->order = $request->order - 0.1;
             $task->save();
-            $tasks = Task::where('pillar_id',$task->pillar_id)->orderBy('order')->get();
-            $i = 1;
-            foreach ($tasks as $task){
-                $task->order = $i;
-                $i++;
-            }
             return;
         }
         Log::debug($request->all());

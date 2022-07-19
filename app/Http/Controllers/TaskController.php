@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\TaskField;
+use App\Models\TaskMetaData;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -36,7 +37,17 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-        $task->update($request->all());
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->save();
+//        $task->fields()->detach();
+//        foreach($request->fields as $field){
+//            TaskMetaData::create([
+//                'task_field_id' => $field['id'],
+//                'task_id'  => $task->id,
+//                'value'  => $field['meta_data']['value']
+//            ]);
+//        }
         return $task;
     }
 

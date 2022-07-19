@@ -9,5 +9,6 @@ class TaskMetaData extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['task_field_id','task_id','value'];
     protected $table = 'task_meta_data';
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pillar extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','description','order','position','board_id'];
+    protected $fillable = ['title','description','order','color','position','board_id'];
 
     public function board(){
         return $this->belongsTo(Board::class);

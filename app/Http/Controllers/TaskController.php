@@ -22,7 +22,8 @@ class TaskController extends Controller
             'title' => $request->title,
             'description'  => $request->description,
             'order' => $request->order,
-            'pillar_id' => $request->pillar_id
+            'pillar_id' => $request->pillar_id,
+            'color' => $request->color,
         ]);
     }
 
@@ -48,6 +49,7 @@ class TaskController extends Controller
         Log::debug($request->all());
         $task->title = $request->title;
         $task->description = $request->description;
+        $task->color = $request->color;
         $task->save();
         $task->fields()->detach();
         foreach($request->fields as $field){

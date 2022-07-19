@@ -20,6 +20,7 @@ class PillarController extends Controller
             'title'  => $request->title,
             'description'  => $request->description,
             'order'  => $request->order,
+            'color' => $request->color,
             'board_id'  => $request->board_id
         ]);
     }
@@ -31,7 +32,10 @@ class PillarController extends Controller
 
     public function update(Request $request, Pillar $pillar)
     {
-        $pillar->update($request->all());
+        $pillar->title = $request->title;
+        $pillar->description = $request->description;
+        $pillar->color = $request->color;
+        $pillar->save();
         return $pillar;
     }
 

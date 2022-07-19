@@ -18,6 +18,7 @@ class CreatePillarsTable extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->integer('order');
+            $table->string('color')->nullable();
             $table->unsignedBigInteger('board_id');
             $table->foreign('board_id')->references('id')->on('boards');
             $table->timestamps();

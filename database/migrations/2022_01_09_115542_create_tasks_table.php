@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->integer('order');
+            $table->string('color')->nullable();
             $table->unsignedBigInteger('pillar_id');
             $table->foreign('pillar_id')->references('id')->on('pillars');
             $table->timestamps();

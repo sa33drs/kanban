@@ -39,7 +39,8 @@ class BoardController extends Controller
 
     public function show(Board $board)
     {
-        return $board->with('pillars','pillars.tasks')->get();
+        //return $board;
+        return $board->with('pillars','pillars.tasks')->first();
     }
 
     public function update(Request $request, Board $board)

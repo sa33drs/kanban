@@ -52,15 +52,17 @@ class TaskController extends Controller
         $task->color = $request->color;
         $task->save();
         $task->fields()->detach();
-        foreach($request->fields as $field){
-            if (empty($field['meta_data'][0]['value'])){
-                continue;
+        if ($request->has('fields')){
+            foreach($request->fields as $field){
+                if (empty($field['meta_data'][0]['value'])){
+                    continue;
+                }
+                TaskMetaData::create([
+                    'task_field_id' => $field['id'],
+                    'task_id'  => $task->id,
+                    'value'  => $field['meta_data'][0]['value']
+                ]);
             }
-            TaskMetaData::create([
-                'task_field_id' => $field['id'],
-                'task_id'  => $task->id,
-                'value'  => $field['meta_data'][0]['value']
-            ]);
         }
         return $task;
     }

@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\TaskField;
 use App\Models\TaskMetaData;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 class TaskController extends Controller
 {
@@ -28,7 +29,9 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         $board_id = $task->pillar->board_id;
-        $fields = TaskField::query()->where('board_id' , $board_id)->with('metaData')->get();
+        $fields = TaskField::query()->where('board_id' , $board_id)->with(['metaData'=>function($query)use ($task){
+            $query->where('task_field_id',$task->id);
+        }])->get();
         return response()->json([
             'task' => $task ,
             'fields' => $fields
@@ -42,6 +45,9 @@ class TaskController extends Controller
         $task->save();
         $task->fields()->detach();
         foreach($request->fields as $field){
+            if (isEmpty($field['meta_data'][0]['value'])){
+                continue;
+            }
             TaskMetaData::create([
                 'task_field_id' => $field['id'],
                 'task_id'  => $task->id,

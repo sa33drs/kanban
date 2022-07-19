@@ -21,6 +21,8 @@ class TaskController extends Controller
         ]);
         return Task::create([
             'title' => $request->title,
+            'description'  => $request->description,
+            'order' => $request->order,
             'pillar_id' => $request->pillar_id
         ]);
     }

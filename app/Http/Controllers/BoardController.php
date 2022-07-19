@@ -41,7 +41,7 @@ class BoardController extends Controller
     {
         //return $board;
         $board_id = $board->id;
-        return $board->with('pillars','pillars.tasks')->whereIn('id',$board_id)->firstOrFail();
+        return $board->with('pillars','pillars.tasks')->where('id',$board_id)->firstOrFail();
     }
 
     public function update(Request $request, Board $board)

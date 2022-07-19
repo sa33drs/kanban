@@ -40,14 +40,14 @@ class TaskController extends Controller
         $task->title = $request->title;
         $task->description = $request->description;
         $task->save();
-//        $task->fields()->detach();
-//        foreach($request->fields as $field){
-//            TaskMetaData::create([
-//                'task_field_id' => $field['id'],
-//                'task_id'  => $task->id,
-//                'value'  => $field['meta_data']['value']
-//            ]);
-//        }
+        $task->fields()->detach();
+        foreach($request->fields as $field){
+            TaskMetaData::create([
+                'task_field_id' => $field['id'],
+                'task_id'  => $task->id,
+                'value'  => $field['meta_data']['value']
+            ]);
+        }
         return $task;
     }
 

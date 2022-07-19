@@ -42,6 +42,7 @@ class TaskController extends Controller
     {
         if ($request->pillar_id > 0){
             $task->pillar_id = $request->pillar_id;
+            $task->save();
             return;
         }
         Log::debug($request->all());

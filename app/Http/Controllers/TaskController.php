@@ -6,7 +6,6 @@ use App\Models\Task;
 use App\Models\TaskField;
 use App\Models\TaskMetaData;
 use Illuminate\Http\Request;
-use function PHPUnit\Framework\isEmpty;
 
 class TaskController extends Controller
 {
@@ -40,12 +39,13 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
+        Log::debug($request->all());
         $task->title = $request->title;
         $task->description = $request->description;
         $task->save();
         $task->fields()->detach();
         foreach($request->fields as $field){
-            if (isEmpty($field['meta_data'][0]['value'])){
+            if (empty($field['meta_data'][0]['value'])){
                 continue;
             }
             TaskMetaData::create([

@@ -30,7 +30,7 @@ class TaskController extends Controller
     {
         $board_id = $task->pillar->board_id;
         $fields = TaskField::query()->where('board_id' , $board_id)->with(['metaData'=>function($query)use ($task){
-            $query->where('task_field_id',$task->id);
+            $query->where('task_id',$task->id);
         }])->get();
         return response()->json([
             'task' => $task ,

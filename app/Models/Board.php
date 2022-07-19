@@ -10,6 +10,9 @@ class Board extends Model
     use HasFactory;
     protected $fillable = ['title','description','creator_id'];
 
+    public function pillars(){
+        return $this->hasMany(Pillar::class);
+    }
 //    public function users(){
 //        return $this->belongsToMany(Board::class);
 //    }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\TaskField;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -25,7 +26,12 @@ class TaskController extends Controller
 
     public function show(Task $task)
     {
-        return $task;
+        $board_id = $task->pillar->board_id;
+        $fields = TaskField::query()->where('board_id' , $board_id)->with('metaData')->get();
+        return response()->json([
+            'task' => $task ,
+            'fields' => $fields
+        ]);
     }
 
     public function update(Request $request, Task $task)

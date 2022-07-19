@@ -9,4 +9,9 @@ class TaskField extends Model
 {
     use HasFactory;
     protected $fillable = ['title','type','board_id'];
+
+    public function metaData()
+    {
+        return $this->hasMany(TaskMetaData::class , 'task_field_id' , 'id');
+    }
 }

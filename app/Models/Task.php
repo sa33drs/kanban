@@ -10,4 +10,10 @@ class Task extends Model
     use HasFactory;
     protected $fillable = ['title','description','order','pillar_id'];
 
+    public function pillar(){
+        return $this->belongsTo(Pillar::class);
+    }
+    public function fields(){
+        return $this->belongsToMany(TaskField::class,'task_meta_data','task_id','task_field_id')->withPivot('value');
+    }
 }

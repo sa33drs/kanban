@@ -45,9 +45,6 @@ class TaskController extends Controller
         $task->save();
         $task->fields()->detach();
         foreach($request->fields as $field){
-            if (isEmpty($field['meta_data'][0]['value'])){
-                continue;
-            }
             TaskMetaData::create([
                 'task_field_id' => $field['id'],
                 'task_id'  => $task->id,

@@ -45,7 +45,7 @@ class TaskController extends Controller
             TaskMetaData::create([
                 'task_field_id' => $field['id'],
                 'task_id'  => $task->id,
-                'value'  => $field['meta_data']['value']
+                'value'  => $field['meta_data'][0]['value']
             ]);
         }
         return $task;
